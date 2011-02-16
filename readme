@@ -1,1 +1,12 @@
 MidiNode is NodeJS module that allows cross platform access to MIDI devices.
+
+Requirements:
+* Node (obviously)
+* libportmidi
+* libev
+
+To install:
+
+$ make
+
+And you're good to go.
