@@ -1,2 +1,2 @@
 var MidiNode = require('midinode');
-console.log(MidiNode.version);
+console.log(MidiNode.getDevices());

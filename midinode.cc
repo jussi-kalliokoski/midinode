@@ -9,11 +9,19 @@ A NodeJS module for access to native MIDI drivers.
 #include <ev.h>
 #include <portmidi.h>
 
-using namespace v8;
+#define SET_METHOD(obj, name, callback)						\
+	obj->Set(	v8::String::NewSymbol(name),				\
+			v8::FunctionTemplate::New(callback)->GetFunction())
+
+v8::Handle<v8::Value> getDevices(const v8::Arguments& args);
 
 extern "C" void
-init (Handle<Object> target)
+init (v8::Handle<v8::Object> target)
 {
-	HandleScope scope;
-	target->Set(String::New("version"), String::New("0.0.1"));
+	v8::HandleScope scope;
+	SET_METHOD(target, "getDevices", getDevices);
+}
+
+v8::Handle<v8::Value> getDevices(const v8::Arguments& args){
+	return v8::Integer::New(16);
 }
