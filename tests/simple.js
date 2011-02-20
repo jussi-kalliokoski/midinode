@@ -1,3 +1,6 @@
 var MidiNode = require('midinode');
-console.log(MidiNode.getDefaultInput());
 console.log(MidiNode.getDevices());
+var input = MidiNode.getDefaultInput();
+input.listen(function(e){
+	console.log(e);
+});
