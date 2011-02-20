@@ -25,6 +25,7 @@ v8::Handle<v8::Object> midiDevice(int id);
 v8::Handle<v8::Value> getDevices(const v8::Arguments& args);
 v8::Handle<v8::Value> getDefaultOutput(const v8::Arguments& args);
 v8::Handle<v8::Value> getDefaultInput(const v8::Arguments& args);
+v8::Handle<v8::Value> listen(const v8::Arguments& args);
 
 extern "C" void
 init (v8::Handle<v8::Object> target)
@@ -60,8 +61,14 @@ v8::Handle<v8::Object> midiDevice(int id){
 	SET_VALUE(devObj, "id", id, Integer);
 	if (devInfo->input){
 		SET_VALUE(devObj, "type", "input", String);
+		SET_METHOD(devObj, "listen", listen);
 	} else if (devInfo->output){
 		SET_VALUE(devObj, "type", "output", String);
 	}
 	return devObj;
+}
+
+v8::Handle<v8::Value> listen(const v8::Arguments& args){
+	v8::HandleScope scope;
+	return args.This();
 }
