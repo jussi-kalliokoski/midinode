@@ -70,7 +70,12 @@ v8::Handle<v8::Object> midiDevice(int id){
 
 v8::Handle<v8::Value> listen(const v8::Arguments& args){
 	v8::HandleScope scope;
-	v8::Handle<v8::Value* val;
-	args[0]->Call(args.This, 0, val);
-	return args.This();
+	if (args.Length() == 0 || !args[0]->IsFunction()){
+		return v8::ThrowException(v8::String::New("Bad parameters"));
+	}
+	args[0].GetName();
+	return args.Holder();
+/*	v8::Handle<v8::Value* val;
+	args[0]->Call(args.This, 0, val);*/
+	//return args.This();
 }
